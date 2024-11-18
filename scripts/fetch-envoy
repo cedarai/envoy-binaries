@@ -70,8 +70,9 @@ extract_envoy() {
     (
         cd "$_bin_dir"
         shasum -a 256 "envoy-$_os-$_arch" >"envoy-$_os-$_arch".sha256
-        tar -cJf "envoy-$_os-$_arch.txz" "envoy-$_os-$_arch"
-        rm -f "envoy-$_os-$_arch"
+        mv "envoy-$_os-$_arch" "envoy"
+        tar -cJf "envoy-$_os-$_arch.txz" "envoy"
+        rm -f "envoy"
     )
 }
 
