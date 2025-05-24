@@ -31,6 +31,7 @@ jobs:
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
           brew install oras
+          echo "$(/home/linuxbrew/.linuxbrew/bin/brew --prefix)/bin" >> $GITHUB_PATH
 
       - name: fetch and upload envoy (linux)
         env:
