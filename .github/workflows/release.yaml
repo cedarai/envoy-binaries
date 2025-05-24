@@ -34,15 +34,16 @@ jobs:
 
       - name: fetch and upload envoy (linux)
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ./scripts/fetch-envoy ${{ steps.tagName.outputs.tag }} linux amd64
           ./scripts/fetch-envoy ${{ steps.tagName.outputs.tag }} linux arm64
           gh release upload ${{ steps.tagName.outputs.tag }} bin/envoy-linux-* --clobber
 
-      - name: fetch and upload our built envoy (darwin)
+      - name: fetch and upload envoy (darwin)
         env:
-          GH_TOKEN: ${{ secrets.APPARITOR_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release download -R pomerium/envoy-build ${{ steps.tagName.outputs.tag }}
-          gh release upload ${{ steps.tagName.outputs.tag }} envoy-darwin-* --clobber
+          ./scripts/fetch-envoy ${{ steps.tagName.outputs.tag }} darwin amd64
+          ./scripts/fetch-envoy ${{ steps.tagName.outputs.tag }} darwin arm64
+          gh release upload ${{ steps.tagName.outputs.tag }} bin/envoy-darwin-* --clobber
